@@ -1,0 +1,18 @@
+# API Testing
+
+The application was tested locally after implementing the fixes.
+
+Tested endpoints:
+- GET /api/todos
+- POST /api/todos
+- PUT /api/todos/:id
+- DELETE /api/todos/:id
+
+The PUT endpoint was verified after fixing the issue where title updates were not being saved.
+
+Backend status:
+- MongoDB Connected
+- Server running on port 5000
+
+Frontend status:
+- Compiled successfully on localhost:3000

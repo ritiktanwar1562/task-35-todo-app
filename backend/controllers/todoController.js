@@ -1,4 +1,4 @@
-const todoService = require("../services/todoservice");
+const todoService = require("../services/todoService");
 
 exports.getTodos = async (req, res) => {
   try {
@@ -35,7 +35,13 @@ exports.deleteTodo = async (req, res) => {
 
 exports.updateTodo = async (req, res) => {
   try {
-    const updatedTodo = await todoService.updateTodo(req.params.id);
+    const { title, completed } = req.body;
+
+const updatedTodo = await todoService.updateTodo(
+  req.params.id,
+  title,
+  completed
+);
 
     if (!updatedTodo) {
       return res.status(404).json({ message: "Todo not found" });
