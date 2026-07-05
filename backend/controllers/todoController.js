@@ -1,30 +1,48 @@
-const Todo = require("../models/Todo");
+const todoService = require("../services/todoservice");
 
 exports.getTodos = async (req, res) => {
-  const todos = await Todo.find();
-  res.json(todos);
+  try {
+    const todos = await todoService.getTodos();
+    res.status(200).json(todos);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch todos" });
+  }
 };
 
 exports.addTodo = async (req, res) => {
-  const todo = new Todo({
-    title: req.body.title,
-  });
+  try {
+    const { title } = req.body;
 
-  const savedTodo = await todo.save();
-  res.json(savedTodo);
+    if (!title || title.trim() === "") {
+      return res.status(400).json({ message: "Title is required" });
+    }
+
+    const savedTodo = await todoService.createTodo(title);
+    res.status(201).json(savedTodo);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to create todo" });
+  }
 };
 
 exports.deleteTodo = async (req, res) => {
-  await Todo.findByIdAndDelete(req.params.id);
-  res.json({ message: "Todo deleted" });
+  try {
+    await todoService.deleteTodo(req.params.id);
+    res.status(200).json({ message: "Todo deleted" });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to delete todo" });
+  }
 };
 
 exports.updateTodo = async (req, res) => {
-  const updatedTodo = await Todo.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true }
-  );
+  try {
+    const updatedTodo = await todoService.updateTodo(req.params.id);
 
-  res.json(updatedTodo);
+    if (!updatedTodo) {
+      return res.status(404).json({ message: "Todo not found" });
+    }
+
+    res.status(200).json(updatedTodo);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update todo" });
+  }
 };
