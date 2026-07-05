@@ -116,14 +116,25 @@ PUT /api/todos/:id
 DELETE /api/todos/:id
 ---
 
-## Postman Testing
+## API Testing
 
-All API endpoints were tested successfully using Postman.
+The application was tested locally after implementing the required fixes.
 
+Verified endpoints:
 - GET Todo ✅
 - POST Todo ✅
 - PUT Todo ✅
 - DELETE Todo ✅
+
+Backend:
+- MongoDB Connected ✅
+- Server running on port 5000 ✅
+
+Frontend:
+- Compiled successfully on localhost:3000 ✅
+
+Note: API verification was performed locally after fixing the update functionality and adding error handling.
+
 
 ---
 
