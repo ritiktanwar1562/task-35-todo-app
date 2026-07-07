@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const todoService = require("../services/todoService");
 
 exports.getTodos = async (req, res) => {
@@ -11,6 +12,10 @@ exports.getTodos = async (req, res) => {
 
 exports.addTodo = async (req, res) => {
   try {
+    
+    console.log("Body:", req.body);
+console.log("Content-Type:", req.headers["content-type"]);
+
     const { title } = req.body;
 
     if (!title || title.trim() === "") {
@@ -19,13 +24,22 @@ exports.addTodo = async (req, res) => {
 
     const savedTodo = await todoService.createTodo(title);
     res.status(201).json(savedTodo);
+
   } catch (error) {
-    res.status(500).json({ message: "Failed to create todo" });
+    console.error(error);
+  
+    res.status(500).json({
+      message: "Failed to create todo",
+      error: error.message,
+    });
   }
 };
-
 exports.deleteTodo = async (req, res) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: "Invalid Todo ID" });
+    }
+
     await todoService.deleteTodo(req.params.id);
     res.status(200).json({ message: "Todo deleted" });
   } catch (error) {
@@ -35,6 +49,15 @@ exports.deleteTodo = async (req, res) => {
 
 exports.updateTodo = async (req, res) => {
   try {
+
+    console.log("Body:", req.body);
+console.log("Content-Type:", req.headers["content-type"]);
+
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: "Invalid Todo ID" });
+    }
+
+
     const { title, completed } = req.body;
 
 const updatedTodo = await todoService.updateTodo(
@@ -49,6 +72,11 @@ const updatedTodo = await todoService.updateTodo(
 
     res.status(200).json(updatedTodo);
   } catch (error) {
-    res.status(500).json({ message: "Failed to update todo" });
+    console.error(error);
+  
+    res.status(500).json({
+      message: "Failed to update todo",
+      error: error.message,
+    });
   }
 };

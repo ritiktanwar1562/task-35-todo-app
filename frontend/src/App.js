@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "./services/api";
 import TaskForm from "./components/TaskForm";
 import SearchBar from "./components/SearchBar";
 import Filter from "./components/Filter";
 import TaskList from "./components/TaskList";
 
-const BASE_URL = "http://localhost:5000/api/todos";
+const BASE_URL = "/todos";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -21,7 +21,7 @@ function App() {
       setLoading(true);
       setError("");
 
-      const response = await axios.get(BASE_URL);
+      const response = await api.get(BASE_URL);
       setTodos(response.data);
     } catch (err) {
       setError("Failed to fetch todos");
@@ -42,12 +42,12 @@ function App() {
       setError("");
 
       if (editId) {
-        await axios.put(`${BASE_URL}/${editId}`, {
+        await api.put(`${BASE_URL}/${editId}`, {
           title: text,
         });
         setEditId(null);
       } else {
-        await axios.post(BASE_URL, {
+        await api.post(BASE_URL, {
           title: text,
         });
       }
@@ -66,7 +66,7 @@ function App() {
       setLoading(true);
       setError("");
 
-      await axios.delete(`${BASE_URL}/${id}`);
+      await api.delete(`${BASE_URL}/${id}`);
       fetchTodos();
     } catch (err) {
       setError("Failed to delete todo");
@@ -82,7 +82,7 @@ function App() {
   
   const toggleStatus = async (todo) => {
     try {
-      await axios.put(`${BASE_URL}/${todo._id}`, {
+      await api.put(`${BASE_URL}/${todo._id}`, {
         title: todo.title,
         completed: !todo.completed,
       });

@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-I made this project to understand full-stack web development using the MERN stack. The application allows users to create, view, update, and delete todos. The main goal of this project was to learn how frontend and backend communicate through REST APIs and how MongoDB stores data.
+This is a full-stack Todo application developed using the MERN stack. The application allows users to create, view, update and delete todos. The main objective of this project was to understand how React communicates with a Node.js and Express backend using REST APIs and how MongoDB stores application data.
 
 ---
 
@@ -10,18 +10,20 @@ I made this project to understand full-stack web development using the MERN stac
 
 ### Frontend
 - React.js
-- CSS
 - Axios
+- CSS
 
 ### Backend
 - Node.js
 - Express.js
-- MongoDB
+- MongoDB Atlas
 - Mongoose
 
 ### Development Tools
-- VS Code
-- Git and GitHub
+- Visual Studio Code
+- Git & GitHub
+- Hoppscotch
+- Browser Developer Tools
 - npm
 
 ---
@@ -31,8 +33,10 @@ I made this project to understand full-stack web development using the MERN stac
 - Add a new todo
 - View all todos
 - Update todo title
-- Mark todos as completed
-- Delete todos
+- Mark todo as completed
+- Delete todo
+- Search todos
+- Filter completed and pending todos
 - Responsive user interface
 - MongoDB database integration
 
@@ -43,47 +47,45 @@ I made this project to understand full-stack web development using the MERN stac
 todo-app/
 │
 ├── frontend/
-│   ├── src/
-│   └── public/
 │
 ├── backend/
 │   ├── controllers/
-│   ├── services/
 │   ├── models/
 │   ├── routes/
-│   └── .env.example
+│   ├── services/
+│   ├── .env.example
 │
 └── README.md
 ---
 
 ## Backend Setup
 
-Move to backend folder:
+Move to the backend folder:
 
 cd backend
 Install dependencies:
 
 npm install
-Start the backend server:
+Run the backend server:
 
 npm start
-Backend runs on:
+Backend runs at:
 
 http://localhost:5000
 ---
 
 ## Frontend Setup
 
-Move to frontend folder:
+Move to the frontend folder:
 
 cd frontend
 Install dependencies:
 
 npm install
-Run the React application:
+Start the React application:
 
 npm start
-Frontend runs on:
+Frontend runs at:
 
 http://localhost:3000
 ---
@@ -96,16 +98,20 @@ Example:
 
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
-A sample file is also provided as .env.example.
+A sample environment file .env.example is included in the backend folder for reference.
 
 ---
 
 ## API Endpoints
 
-### Get All Todos
+### GET
 
 GET /api/todos
-### Create Todo
+Fetch all todos.
+
+---
+
+### POST
 
 POST /api/todos
 Request Body:
@@ -113,7 +119,9 @@ Request Body:
 {
   "title": "Learn Express"
 }
-### Update Todo
+---
+
+### PUT
 
 PUT /api/todos/:id
 Request Body:
@@ -122,84 +130,105 @@ Request Body:
   "title": "Learn Express Updated",
   "completed": true
 }
-### Delete Todo
+---
+
+### DELETE
 
 DELETE /api/todos/:id
+Deletes a todo by ID.
+
+---
+
+## API Testing
+
+After implementing the required changes, the APIs were tested successfully.
+
+Testing tools used:
+
+- Hoppscotch
+- Browser Developer Tools (Network Tab)
+
+Verified APIs:
+
+- ✅ GET /api/todos
+- ✅ POST /api/todos
+- ✅ PUT /api/todos/:id
+- ✅ DELETE /api/todos/:id
+
+API testing screenshots have been included with the project submission.
+
 ---
 
 ## Improvements Made After Feedback
 
-The following changes were implemented after receiving mentor feedback:
+The following improvements were implemented after mentor feedback:
 
-### Fixed Update Functionality
-
-Initially, only the completed status was being updated.
-
-Now both fields are updated correctly:
-
-- title
-- completed
-
-### Added Error Handling
-
-Error handling was added to the service layer using try-catch blocks.
-
-Validation was also added to ensure that empty titles cannot be created.
-
-### Added Environment Example File
-
-A .env.example file was added to help other users set up the project easily.
-
-### Re-tested the Application
-
-The application was run again after implementing all fixes to verify that the changes work correctly.
+- Added .env.example file in the backend folder.
+- Added Axios request and response interceptors for centralized API handling.
+- Added centralized frontend API error handling.
+- Added MongoDB ObjectId validation before database queries.
+- Removed duplicate validation logic between controller and service layer.
+- Fixed update functionality for both title and completed status.
+- Updated README with setup instructions and API documentation.
+- Added API testing proof for GET, POST, PUT and DELETE requests.
 
 ---
 
 ## What I Learned
 
-Through this project, I learned:
+Through this project I learned:
 
-- Creating REST APIs using Express.js
-- Connecting Node.js with MongoDB using Mongoose
-- Managing React state with hooks
-- Making API calls using Axios
-- Organizing code into controllers, services, models, and routes
+- Building REST APIs using Express.js
+- Connecting MongoDB with Mongoose
+- React state management using Hooks
+- Using Axios for API requests
+- Creating reusable React components
+- Handling errors properly
+- Organizing backend into controllers, services, models and routes
 - Using Git and GitHub for version control
-- Handling errors and validations properly
-- Working with environment variables
+- API testing and debugging
 
 ---
 
 ## Challenges Faced
 
-Some challenges I faced during this project were:
+Some challenges during development were:
 
-- Understanding communication between frontend and backend.
-- Fixing the update functionality so that both title and completion status update correctly.
-- Implementing proper error handling in the service layer.
-- Managing project structure and folder organization.
-- Testing APIs in an older development environment.
+- Connecting frontend and backend correctly
+- Configuring MongoDB Atlas
+- Fixing update functionality
+- Implementing proper validation and error handling
+- Testing APIs on an older development environment
 
 ---
 
 ## Development Environment
 
-The project was developed on an older Windows laptop using an older version of VS Code.
+The project was developed using:
 
-Because of compatibility limitations with newer versions of Postman and Thunder Client, API verification was performed through local execution and manual testing after implementing the required fixes.
+- Windows
+- Visual Studio Code
+- Node.js
+- React.js
+- Express.js
+- MongoDB Atlas
 
-Verified locally:
+API verification was performed using:
 
-- MongoDB Connected ✅
-- Backend Server Running on Port 5000 ✅
-- Frontend Compiled Successfully on Port 3000 ✅
-- Create Todo ✅
-- Read Todos ✅
-- Update Todo Title and Status ✅
-- Delete Todo ✅
+- Hoppscotch
+- Browser Developer Tools (Network Tab)
+
+Verified Successfully:
+
+- ✅ MongoDB Connected
+- ✅ Backend Running
+- ✅ Frontend Running
+- ✅ GET API
+- ✅ POST API
+- ✅ PUT API
+- ✅ DELETE API
 
 ---
 
 ## Conclusion
-This project helped me understand the complete flow of a full-stack application, from building APIs and connecting databases to creating a user interface with React. It also taught me the importance of code organization, validation, and error handling in real-world applications.
+This project helped me understand the complete MERN stack workflow, including frontend development, backend API development, MongoDB integration, validation, error handling, API testing, and project organization. It improved my understanding of full-stack application development and REST APIs.

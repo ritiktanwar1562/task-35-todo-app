@@ -12,10 +12,6 @@ exports.getTodos = async () => {
 // Create a new todo
 exports.createTodo = async (title) => {
   try {
-    if (!title || title.trim() === "") {
-      throw new Error("Title is required");
-    }
-
     return await Todo.create({
       title,
       completed: false,
